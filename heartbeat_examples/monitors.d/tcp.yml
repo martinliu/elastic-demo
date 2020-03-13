@@ -1,0 +1,29 @@
+- type: tcp
+  name: elasticsearch-checker
+  schedule: '@every 5s'
+  hosts: ["localhost:9200"]
+  ipv4: true
+  ipv6: true
+  mode: any
+  fields:
+    env: dev
+
+- type: tcp
+  name: kibana-checker
+  schedule: '@every 5s'
+  hosts: ["localhost:5601"]
+  ipv4: true
+  ipv6: true
+  mode: any
+  fields:
+    env: dev
+
+- type: tcp
+  name: prod-dns-checker
+  schedule: '@every 5s'
+  hosts: ["tcp://8.8.8.8:53","tcp://114.114.114.114:53","tcp://202.96.128.86:53","tcp://233.5.5.5:53"]
+  ipv4: true
+  ipv6: true
+  mode: any
+  fields:
+    env: prod

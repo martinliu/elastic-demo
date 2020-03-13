@@ -1,0 +1,76 @@
+#最少配置
+- type: http
+  urls: ["https://httpbin.org"]
+  schedule: '@every 30s'
+
+#配置名称
+- type: http
+  urls: ["https://httpbin.org"]
+  schedule: '@every 30s'
+  name: "httpbin-checks"
+
+#配置标签
+- type: http
+  urls: ["https://httpbin.org"]
+  schedule: '@every 30s'
+  name: "httpbin-checks-with-tag"
+  tag: "webinar-demo"
+
+#总是会报错的配置
+- type: http
+  urls: ["https://httpbin.org/status/404"]
+  schedule: '@every 30s'
+  name: "httpbin-checks-always-failling"
+  tag: "webinar-demo"
+
+#期待中的 404 报错
+- type: http
+  urls: ["https://httpbin.org/status/404"]
+  schedule: '@every 30s'
+  name: "httpbin-checks-404-check-always-up"
+  tag: "webinar-demo"
+  check.request.method: "POST"
+  check.response.status: 404
+
+#测试发送某种 body
+- type: http
+  urls: ["https://httpbin.org/anything"]
+  schedule: '@every 30s'
+  name: "httpbin-checks-check-with-body"
+  tag: "webinar-demo"
+  check.request.method: "POST"
+  check.send: 'Hello World'
+
+
+#期待某种返回
+- type: http
+  urls: ["https://httpbin.org/anything/Hello+World"]
+  schedule: '@every 30s'
+  name: "httpbin-checks-expect-body"
+  tag: "webinar-demo"
+  check.request.method: "POST"
+  check.receive: 'Hello World'
+
+#测试 auth 基本认证
+- type: http
+  urls: ["https://httpbin.org/basic-auth/my_user/my_password"]
+  schedule: '@every 30s'
+  name: "httpbin-checks-basic-auth"
+  tag: "webinar-demo"
+  username: "my_user"
+  password: "my_password"
+
+#测试 header 里的返回值
+- type: http
+  urls: ["https://httpbin.org/response-headers?freeform=my_value"]
+  schedule: '@every 30s'
+  name: "httpbin-checks-response-headers"
+  tag: "webinar-demo"
+  check.response.headers:
+    'freeform' : 'my_value'
+
+# 测试一组外网依赖服务
+- type: http
+  urls: ["https://www.elastic.co","https://cloud.elastic.co","https://blog.elastic.co","https://shop.elastic.co"]
+  schedule: '@every 30s'
+  name: "elastic-websites-checks"

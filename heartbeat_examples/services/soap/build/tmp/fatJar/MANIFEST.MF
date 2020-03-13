@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Implementation-Title: SOAP Product Service
+Implementation-Version: 1.0
+Main-Class: com.elksoft.ws.ProductPublisher
+
